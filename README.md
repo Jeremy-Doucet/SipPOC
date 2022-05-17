@@ -1,7 +1,7 @@
 ## Getting Started
 
 Requirements:
-1. Psql v9.5 (this was a included from the generator I used. If this is a blocker, we can move the project to a pure next.js app)
+1. Psql v9.5 (this was included from the generator I used. If this is a blocker, we can move the project to a pure next.js app)
 2. Nodejs v16.5
 
 These are the versions that are on my machine. Other versions will most likely work, I just wanted to call these out.
