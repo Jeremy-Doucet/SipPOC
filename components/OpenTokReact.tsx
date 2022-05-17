@@ -112,9 +112,3 @@ export function OpenTok({ apiKey, token, sessionId }) {
     </div>
   );
 }
-
-{
-  /* <div>
-
-        </div> */
-}

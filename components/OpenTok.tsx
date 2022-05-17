@@ -14,6 +14,10 @@ export function OpenTok({ apiKey, token, sessionId }) {
     await fetch('/api/opentok/call');
   };
 
+  const playVideo = async () => {
+    await fetch('/api/opentok/play-video');
+  };
+
   const handleError = (err) => {
     if (err) console.error(err);
   };
@@ -71,6 +75,7 @@ export function OpenTok({ apiKey, token, sessionId }) {
   return (
     <div>
       <Button onClick={callMe}>Call Me</Button>
+      <Button onClick={playVideo}>Play Video</Button>
 
       <div id="publisher"></div>
       <div id="subscriber"></div>
