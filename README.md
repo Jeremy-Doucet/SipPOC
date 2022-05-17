@@ -3,6 +3,8 @@
 Requirements:
 1. Psql v9.5 (this was included from the generator I used. If this is a blocker, we can move the project to a pure next.js app)
 2. Nodejs v16.5
+3. Vonage Video API account (https://www.vonage.com/log-in/?icmp=utilitynav_login_novalue#api)
+4. SIP client to call (I used Linphone https://linphone.org/products, and created a SIP account through that)
 
 These are the versions that are on my machine. Other versions will most likely work, I just wanted to call these out.
 
