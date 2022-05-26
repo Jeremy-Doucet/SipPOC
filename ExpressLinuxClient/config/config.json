@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "ExpressLinuxClient_dev",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "ExpressLinuxClient_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": null,
+    "database": "ExpressLinuxClient",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "docker": {
+    "username": "postgres",
+    "password": null,
+    "database": "ExpressLinuxClient_dev",
+    "host": "host.docker.internal",
+    "dialect": "postgres"
+  }
+}
