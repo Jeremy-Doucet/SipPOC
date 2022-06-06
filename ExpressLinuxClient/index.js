@@ -27,10 +27,6 @@ app.post('/start/:sessionId/:token', async (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/stop/:session/:token', (req, res) => {
-
-})
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 })
