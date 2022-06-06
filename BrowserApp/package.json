@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "buildDocker": "docker build -t sip-poc-browser-app .",
+    "runDocker": "docker run --init --rm -p 3000:3000 --name sip-poc-browser-app sip-poc-browser-app",
+    "runCompose": "docker-compose up -d --build",
     "build": "yarn ts-node ./scripts/buildProd",
     "build:types": "yarn build:prisma && touch types.ts && yarn build:nexus && yarn codegen",
     "build:prisma": "prisma generate",

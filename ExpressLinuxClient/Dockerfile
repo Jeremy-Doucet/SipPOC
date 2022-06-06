@@ -5,9 +5,14 @@ FROM node:16
 RUN curl -s https://packagecloud.io/install/repositories/tokbox/debian/script.deb.sh | bash
 RUN apt install -y libopentok-dev
 RUN apt install -y build-essential cmake clang libc++-dev libc++abi-dev \
-    pkg-config libasound2 libpulse-dev libsdl2-dev
+  pkg-config libasound2 libpulse-dev libsdl2-dev
 
 WORKDIR /app
+
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+RUN yarn install
+
 COPY . .
 
 WORKDIR /app/linux-publisher
@@ -17,7 +22,6 @@ RUN CC=clang CXX=clang++ cmake ..
 RUN make
 
 WORKDIR /app
-RUN yarn install
 ENV NODE_ENV=docker
 CMD ["node", "index.js"]
 EXPOSE 3001

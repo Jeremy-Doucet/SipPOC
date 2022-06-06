@@ -1,5 +1,5 @@
 import axios from 'axios';
-import OpenTok, { Session } from 'opentok';
+import OpenTok, { Role, Session } from 'opentok';
 
 const opentok = new OpenTok(process.env.OPENTOK_API_KEY, process.env.OPENTOK_API_SECRET);
 
@@ -7,13 +7,13 @@ export async function getServer() {
   return opentok;
 }
 
-export function getToken(sessionId): string {
-  return opentok.generateToken(sessionId);
+export function getToken(sessionId, role: Role = 'publisher', name = ''): string {
+  return opentok.generateToken(sessionId, { role: role, data: `name=${name}` });
 }
 
 export async function callSipUri(sessionId: string) {
   const server = await getServer();
-  const token = getToken(sessionId);
+  const token = getToken(sessionId, 'publisher', 'device');
   const SIP_URI = process.env.SIP_URI;
 
   console.log('SIP_URI: ' + SIP_URI);
@@ -48,5 +48,11 @@ export async function createSession(): Promise<Session> {
 }
 
 export async function startVideoWaitingRoom(sessionId: string) {
-  return axios.post(`http://localhost:3001/start/${sessionId}/${getToken(sessionId)}`);
+  return axios.post(
+    `${process.env.EXPRESS_SERVER_HOST}/start/${sessionId}/${getToken(
+      sessionId,
+      'publisher',
+      'waiting_room'
+    )}`
+  );
 }

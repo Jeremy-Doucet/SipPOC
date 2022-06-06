@@ -20,15 +20,3 @@ Steps:
 1. Open the browser to localhost:3000 and you should see yourself on the screen
 2. Press "Play Video". That should start playing a video to the stream, and a second box should show up on the screen.
 3. Press "Call Me". That will ring a SIP endpoint. After the SIP client answers, it should stop the video stream and connect to the SIP stream.
-
-## Current Issues
-
-### Video Stream
-
-How do we play a video stream? The documentation and examples I found (https://github.com/opentok/opentok-web-samples/tree/main/Publish-Video) use a JS client where the video is played on the HTML, a chrome API captures the video, and then it takes the place of the webcam video. We are looking for a way that the server can stream a video to the session, so it will continue to play while the provider is getting ready to connect (in case they close their browser, their internet goes out, or whatever).
-
-### Seeing the SIP video
-
-Pressing the "Call Me" button works and calls the SIP client like we expect it to. After the client picks up, it seems like they aren't connected to the same stream. They both don't see another video. After refreshing the browser, everything works as expected.
-
-I haven't been able to see any logs when the SIP client is called, or when it answers the call. Is there an event we should be subscribing to?

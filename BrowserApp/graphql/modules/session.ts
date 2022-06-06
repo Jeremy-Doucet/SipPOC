@@ -23,7 +23,7 @@ export const Session = objectType({
     t.string('token', {
       description: 'The token for this session',
       resolve({ sessionId }) {
-        return getToken(sessionId);
+        return getToken(sessionId, 'moderator');
       },
     });
   },

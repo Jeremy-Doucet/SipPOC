@@ -6,10 +6,6 @@ import Link from 'next/link';
 
 import { CreateSessionForm } from '../components/CreateSessionForm';
 
-// import { OpenTok } from '../components/OpenTok';
-
-// const DynamicComponent = dynamic(() => import('../components/OpenTok').then((mod) => mod.OpenTok));
-
 const GET_SESSIONS = gql`
   query ALL_SESSIONS {
     sessions {
@@ -107,13 +103,6 @@ function Home() {
               ))}
           </Tbody>
         </Table>
-        {/* {opentokSession.sessionId && opentokSession.token && opentokSession.apiKey && (
-          <OpenTok
-            apiKey={opentokSession.apiKey}
-            token={opentokSession.token}
-            sessionId={opentokSession.sessionId}
-          />
-        )} */}
       </Center>
     </>
   );

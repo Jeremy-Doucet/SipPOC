@@ -12,3 +12,7 @@ Install dependencies and setup the database
 Run the docker container
 > `docker build -t express-linux-client .`
 > `docker run --init --rm -p 3001:3001 express-linux-client`
+
+## Notes
+
+This app uses the headless linux publisher found here: https://github.com/nexmo-se/headless-video-publisher-linux
