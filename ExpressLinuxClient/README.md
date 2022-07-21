@@ -4,9 +4,9 @@ This is the client used to serve the waiting room video for the SIP POC.
 
 ## How to Run
 
-Run the docker container
-> `docker build -t express-linux-client .`
-> `docker run --init --rm -p 3001:3001 express-linux-client`
+1. Create a `.env` file, and fill it in with values from the `.env.example` file.
+2. `yarn buildDocker`
+3. `yarn runDocker`
 
 ## Notes
 

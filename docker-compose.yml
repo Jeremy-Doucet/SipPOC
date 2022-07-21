@@ -1,0 +1,53 @@
+# docker-compose.yml
+
+version: "3"
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  web:
+    build:
+      context: ./BrowserApp
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: postgresql://postgres:postgres@db:5432/SipPoc_dev?schema=public
+    container_name: sip-poc-browser-app
+    restart: always
+    volumes:
+      - ./BrowserApp:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/SipPoc_dev?schema=public
+      EXPRESS_SERVER_HOST: http://linux-client:3001
+    depends_on:
+      - db
+      - linux-client
+    links:
+      - db
+      - linux-client
+  linux-client:
+    build:
+      context: ./ExpressLinuxClient
+      dockerfile: Dockerfile
+    container_name: sip-poc-express-linux-client
+    restart: always
+    volumes:
+      - ./ExpressLinuxClient:/app
+      - /app/node_modules
+      - /app/linux-publisher
+    ports:
+      - 3001:3001
+volumes:
+  db:
+    driver: local

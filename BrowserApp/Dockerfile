@@ -1,5 +1,7 @@
 FROM node:16-alpine
 
+ARG DATABASE_URL
+
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json package.json
@@ -10,4 +12,4 @@ COPY . .
 
 RUN yarn build
 # EXPOSE 3000
-CMD ["yarn", "dev"]
+CMD ["yarn", "runDocker"]

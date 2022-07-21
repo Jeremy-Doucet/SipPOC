@@ -4,11 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "nodemon": "^2.0.18"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "yarn nodemon index.js",
     "build": "docker build -t sip-poc-express-linux-client .",
     "buildDocker": "docker build -t sip-poc-express-linux-client .",
     "runDocker": "docker run --init --rm -p 3001:3001 --name sip-poc-express-linux-client sip-poc-express-linux-client"

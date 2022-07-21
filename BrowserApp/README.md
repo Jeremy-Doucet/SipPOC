@@ -15,6 +15,10 @@ Steps:
 4. Run `yarn dev`
 5. Open browser to localhost:3000
 
+You can also run it through docker if you want to
+1. `yarn buildDocker`
+2. `yarn runDocker`
+
 ## Expected Workflow
 
 1. Open the browser to localhost:3000 and you should see yourself on the screen

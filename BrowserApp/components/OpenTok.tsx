@@ -43,10 +43,20 @@ export function OpenTok({ apiKey, token, sessionId }) {
       }
     });
 
+    session.on('connectionDestroyed sessionDisconnected signal streamDestroyed', (e) => {
+      console.log('unhandled event');
+      console.log(e);
+    });
+
     session.connect(token, (err) => {
       if (err) return handleError(err);
-      // session.publish(publisher, handleError);
+      console.log('connected to the session');
     });
+
+    return () => {
+      console.log('in session cleanup');
+      if (session) session.disconnect();
+    };
   }, [session]);
 
   const callMember = async () => {
@@ -62,7 +72,7 @@ export function OpenTok({ apiKey, token, sessionId }) {
 
   const joinCall = () => {
     console.log('JOINING THE CALL');
-    console.log(OT);
+    console.log(session);
 
     const publisherOpts: { insertMode: 'append'; width: string; height: string } = {
       insertMode: 'append',
@@ -72,8 +82,11 @@ export function OpenTok({ apiKey, token, sessionId }) {
 
     const publisher = OT.initPublisher('publisher', publisherOpts, handleError);
     session.publish(publisher, handleError);
-    session.forceDisconnect(waitingRoomConnection);
-    setWaitingRoomConnection(null);
+
+    if (waitingRoomConnection) {
+      session.forceDisconnect(waitingRoomConnection);
+      setWaitingRoomConnection(null);
+    }
   };
 
   return (
