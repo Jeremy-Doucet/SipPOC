@@ -1,5 +1,9 @@
 db/
 node_modules/
 
+# Files related to the audio/video files
+dog.jpg
+output.mp4
+output30fps.mp4
 audio.pcm
 video.yuv
