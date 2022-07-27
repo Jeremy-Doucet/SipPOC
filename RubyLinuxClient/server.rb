@@ -19,13 +19,15 @@ class Application < Sinatra::Base
     @sessionId = params["sessionId"]
     @token = params["token"]
 
-    publisher = Process.spawn('./linux-publisher/src/build/headless-video-publisher', [
+    puts `Starting session #{@sessionId} with token #{@token}`
+
+    publisher = spawn('./linux-publisher/src/build/headless-video-publisher', [
         '-v', 'video.yuv', '-a', 'audio.pcm', `-k`, settings.api_key, `-s`, @sessionId, `-t`, @token
       ])
     Process.wait publisher
 
-    puts `Starting session #{@sessionId} with token #{@token}`
-
     "success"
   end
+
+
 end
