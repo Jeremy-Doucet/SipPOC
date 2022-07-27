@@ -2,8 +2,8 @@ require 'rubygems'
 require 'bundler'
 require 'dotenv'
 
-Bundler.require
 Dotenv.load
+Bundler.require
 
 require './server'
-run Sinatra::Application
+run Application

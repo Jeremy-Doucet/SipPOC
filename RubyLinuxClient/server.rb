@@ -1,21 +1,31 @@
-require 'sinatra'
-set :opentok_api_key, ENV['OPENTOK_API_KEY']
+require 'sinatra/base'
 
-get '/' do
-  "Hello World"
-  settings.opentok_api_key
-end
+raise "You must define API_KEY environment variables" unless ENV.has_key?("OPENTOK_API_KEY")
 
-post '/start/:sessionId/:token' do
-  @sessionId = params["sessionId"]
-  @token = params["token"]
+class Application < Sinatra::Base
+  set :api_key, ENV['OPENTOK_API_KEY']
 
-  publisher = Process.spawn('./linux-publisher/src/build/headless-video-publisher', [
-      '-v', 'video.yuv', '-a', 'audio.pcm', `-k`, settings.opentok_api_key, `-s`, @sessionId, `-t`, @token
-    ])
-  Process.wait publisher
+  get '/' do
+    "Hello World"
+  end
 
-  puts `Starting session #{@sessionId} with token #{@token}`
+  get '/apikey' do
+    api_key = settings.api_key
 
-  "success"
+    "api key #{api_key}"
+  end
+
+  post '/start/:sessionId/:token' do
+    @sessionId = params["sessionId"]
+    @token = params["token"]
+
+    publisher = Process.spawn('./linux-publisher/src/build/headless-video-publisher', [
+        '-v', 'video.yuv', '-a', 'audio.pcm', `-k`, settings.api_key, `-s`, @sessionId, `-t`, @token
+      ])
+    Process.wait publisher
+
+    puts `Starting session #{@sessionId} with token #{@token}`
+
+    "success"
+  end
 end
